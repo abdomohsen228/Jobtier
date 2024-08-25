@@ -22,8 +22,7 @@ public class WebSecurityConfig {
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
 
-    private  final String[] public_URL = {
-            "/",
+    private  final String[] publicUrL = {"/",
             "/global-search/**",
             "/register",
             "/register/**",
@@ -43,7 +42,7 @@ public class WebSecurityConfig {
     protected SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider());
         http.authorizeHttpRequests(auth->{
-            auth.requestMatchers(public_URL).permitAll();
+            auth.requestMatchers(publicUrL).permitAll();
             auth.anyRequest().authenticated();
         });
         http.formLogin(form-> form.loginPage("/login").permitAll()
@@ -52,7 +51,7 @@ public class WebSecurityConfig {
                     logout.logoutUrl("/logout");
                     logout.logoutSuccessUrl("/");
                 }).cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable() );
+                .csrf(csrf->csrf.disable() );
         return http.build();
     }
 

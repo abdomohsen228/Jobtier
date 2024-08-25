@@ -1,5 +1,6 @@
 package com.luv2code.jobportal.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class JobSeekerProfile {
     @MapsId
     private Users userId;
 
+    @Nullable
     private String firstName;
     private String lastName;
     private String city;
