@@ -2,7 +2,6 @@ package com.luv2code.jobportal.util;
 
 import com.luv2code.jobportal.entity.Users;
 import com.luv2code.jobportal.entity.UsersType;
-import org.apache.catalina.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,17 +10,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomUserDetails  implements UserDetails {
-    private final Users user;
+public class CustomUserDetails implements UserDetails {
 
-    public CustomUserDetails(Users  user) {
+    private Users user;
+
+    public CustomUserDetails(Users user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        UsersType usersType=user.getUserTypeId();
-        List<SimpleGrantedAuthority> authorities=new ArrayList<>();
+        UsersType usersType = user.getUserTypeId();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(usersType.getUserTypeName()));
         return authorities;
     }

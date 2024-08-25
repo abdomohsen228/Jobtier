@@ -1,4 +1,5 @@
 package com.luv2code.jobportal.controller;
+
 import com.luv2code.jobportal.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -10,24 +11,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class JobPostActivityController {
+
     private final UsersService usersService;
 
     @Autowired
     public JobPostActivityController(UsersService usersService) {
         this.usersService = usersService;
     }
-    @GetMapping("/dashboard")
-    public String searchJobs(Model model) {
-        Object currentUserProfile = usersService.getCurrentUserProfile();
-        Authentication  authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if(!(authentication instanceof AnonymousAuthenticationToken)) {
+    @GetMapping("/dashboard/")
+    public String searchJobs(Model model) {
+
+        Object currentUserProfile = usersService.getCurrentUserProfile();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
-            model.addAttribute("currentUser", currentUsername);
+            model.addAttribute("username", currentUsername);
         }
-        model.addAttribute("currentUserProfile", currentUserProfile);
+
+        model.addAttribute("user", currentUserProfile);
 
         return "dashboard";
-
     }
 }
