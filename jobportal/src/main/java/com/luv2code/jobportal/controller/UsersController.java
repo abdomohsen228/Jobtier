@@ -1,5 +1,4 @@
 package com.luv2code.jobportal.controller;
-
 import com.luv2code.jobportal.entity.Users;
 import com.luv2code.jobportal.entity.UsersType;
 import com.luv2code.jobportal.services.UsersService;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,39 +30,11 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/join_as")
-    public String joinAs(@RequestParam(value = "type", required = false) String type, Model model) {
-        if (type == null) {
-            model.addAttribute("error", "Registration type is required.");
-            return "join_as";
-        }
-
-        if ("Job Seeker".equalsIgnoreCase(type)) {
-            return "redirect:/register-JobSeeker";
-        } else if ("Recruiter".equalsIgnoreCase(type)) {
-            return "redirect:/register-recruiter";
-        } else {
-            model.addAttribute("error", "Invalid registration type.");
-            return "join_as";
-        }
-    }
-
-
-    @GetMapping("/register-JobSeeker")
-    public String registerClient(Model model) {
+    @GetMapping("/register")
+    public String register(Model model) {
         List<UsersType> usersTypes = usersTypeService.getAll();
         model.addAttribute("getAllTypes", usersTypes);
         model.addAttribute("user", new Users());
-        model.addAttribute("userType", "Job Seeker");
-        return "register";
-    }
-
-    @GetMapping("/register-recruiter")
-    public String registerCompany(Model model) {
-        List<UsersType> usersTypes = usersTypeService.getAll();
-        model.addAttribute("getAllTypes", usersTypes);
-        model.addAttribute("user", new Users());
-        model.addAttribute("userType", "Recruiter");
         return "register";
     }
 
@@ -72,7 +42,7 @@ public class UsersController {
     public String userRegistration(@Valid Users users, Model model) {
         Optional<Users> optionalUsers = usersService.getUserByEmail(users.getEmail());
         if (optionalUsers.isPresent()) {
-            model.addAttribute("error", "Email already registered, try to login or register with another email.");
+            model.addAttribute("error", "Email already registered,try to login or register with other email.");
             List<UsersType> usersTypes = usersTypeService.getAll();
             model.addAttribute("getAllTypes", usersTypes);
             model.addAttribute("user", new Users());
