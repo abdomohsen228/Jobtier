@@ -14,7 +14,7 @@ public class RecruiterProfile {
     @MapsId
 //    This annotation tells JPA that the primary key of the current entity
 //    (userAccountId) should be mapped to the primary key of the Users entity through userId.
-//    This means that both entities share the same primary key value.
+//     This means that both entities share the same primary key value.
     private Users userId;
 
     private String firstName;
@@ -119,6 +119,15 @@ public class RecruiterProfile {
 
     public void setProfilePhoto(String profilePhoto) {
         this.profilePhoto = profilePhoto;
+    }
+
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (profilePhoto == null) {
+            return null;
+        }
+        return "/photos/recruiter"+userAccountId+"/"+profilePhoto;
     }
 
     @Override
