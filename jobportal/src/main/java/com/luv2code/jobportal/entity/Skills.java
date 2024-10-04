@@ -1,29 +1,31 @@
 package com.luv2code.jobportal.entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name ="skills")
+@Table(name = "skills")
 public class Skills {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
     private String experienceLevel;
-    private String yearOfExperience;
+    private String yearsOfExperience;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_seeker_profile")
     private JobSeekerProfile jobSeekerProfile;
-    public Skills() {}
 
-    public Skills(int id, String name, String experienceLevel, String yearOfExperience, JobSeekerProfile jobSeekerProfile) {
+    public Skills() {
+    }
+
+    public Skills(int id, String name, String experienceLevel, String yearsOfExperience, JobSeekerProfile jobSeekerProfile) {
         this.id = id;
         this.name = name;
         this.experienceLevel = experienceLevel;
-        this.yearOfExperience = yearOfExperience;
+        this.yearsOfExperience = yearsOfExperience;
         this.jobSeekerProfile = jobSeekerProfile;
     }
 
@@ -51,12 +53,12 @@ public class Skills {
         this.experienceLevel = experienceLevel;
     }
 
-    public String getYearOfExperience() {
-        return yearOfExperience;
+    public String getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
-    public void setYearOfExperience(String yearOfExperience) {
-        this.yearOfExperience = yearOfExperience;
+    public void setYearsOfExperience(String yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
     }
 
     public JobSeekerProfile getJobSeekerProfile() {
@@ -73,7 +75,7 @@ public class Skills {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", experienceLevel='" + experienceLevel + '\'' +
-                ", yearOfExperience='" + yearOfExperience + '\'' +
+                ", yearsOfExperience='" + yearsOfExperience + '\'' +
                 ", jobSeekerProfile=" + jobSeekerProfile +
                 '}';
     }

@@ -3,7 +3,7 @@ package com.luv2code.jobportal.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "recruiter_profile") // Check table name typo correction
+@Table(name = "recruiter_profile")
 public class RecruiterProfile {
 
     @Id
@@ -17,12 +17,18 @@ public class RecruiterProfile {
     private String firstName;
     private String lastName;
     private String city;
+
     private String state;
+
     private String country;
+
     private String company;
 
     @Column(nullable = true, length = 64)
     private String profilePhoto;
+
+    public RecruiterProfile() {
+    }
 
     public RecruiterProfile(int userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String company, String profilePhoto) {
         this.userAccountId = userAccountId;
@@ -35,8 +41,6 @@ public class RecruiterProfile {
         this.company = company;
         this.profilePhoto = profilePhoto;
     }
-
-    public RecruiterProfile() {}
 
     public RecruiterProfile(Users users) {
         this.userId = users;

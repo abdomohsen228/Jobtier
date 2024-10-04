@@ -14,14 +14,14 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
+    private Users user;
 
-    private final Users user;
     public CustomUserDetails(Users user) {
         this.user = user;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Used to create a specific authority for the user based on their type.
         UsersType usersType = user.getUserTypeId();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(usersType.getUserTypeName()));
@@ -50,9 +50,11 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;    }
+        return true;
+    }
 
     @Override
     public boolean isEnabled() {
-        return true;    }
+        return true;
+    }
 }

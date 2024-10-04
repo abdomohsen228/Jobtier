@@ -9,19 +9,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-
-// Providing a service to retrieve user details from the database and integrating them into Spring Security.
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+
     private final UsersRepository usersRepository;
+
     @Autowired
     public CustomUserDetailsService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       Users user= usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Could not found user : "+username));
+        Users user = usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Could not found user"));
         return new CustomUserDetails(user);
     }
 }

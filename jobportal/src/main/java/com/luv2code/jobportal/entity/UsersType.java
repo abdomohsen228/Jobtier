@@ -7,22 +7,23 @@ import java.util.List;
 @Entity
 @Table(name = "users_type")
 public class UsersType {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userTypeId;
 
     private String userTypeName;
 
-    @OneToMany(targetEntity = Users.class,mappedBy = "userTypeId" , cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
     private List<Users> users;
+
+    public UsersType() {
+    }
 
     public UsersType(int userTypeId, String userTypeName, List<Users> users) {
         this.userTypeId = userTypeId;
         this.userTypeName = userTypeName;
         this.users = users;
-    }
-    public UsersType() {
-
     }
 
     public int getUserTypeId() {
@@ -54,7 +55,6 @@ public class UsersType {
         return "UsersType{" +
                 "userTypeId=" + userTypeId +
                 ", userTypeName='" + userTypeName + '\'' +
-                ", users=" + users +
                 '}';
     }
 }

@@ -1,13 +1,15 @@
 package com.luv2code.jobportal.entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+
 @Entity
 @Table(name = "users")
 public class Users {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
@@ -24,18 +26,20 @@ public class Users {
     private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userTypeId" , referencedColumnName = "userTypeId")
+    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType userTypeId;
 
-    public Users(String email, int userId, String password, boolean isActive, Date registartionDate, UsersType userTypeId) {
+    public Users() {
+    }
+
+    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
-        this.registrationDate = registartionDate;
+        this.registrationDate = registrationDate;
         this.userTypeId = userTypeId;
     }
-    public Users() {}
 
     public int getUserId() {
         return userId;
@@ -53,11 +57,11 @@ public class Users {
         this.email = email;
     }
 
-    public @NotEmpty String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotEmpty String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -73,8 +77,8 @@ public class Users {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registartionDate) {
-        this.registrationDate = registartionDate;
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public UsersType getUserTypeId() {
