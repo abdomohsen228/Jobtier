@@ -1,5 +1,4 @@
 package com.luv2code.jobportal.config;
-
 import com.luv2code.jobportal.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +12,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+//annotation marks this class as a configuration class,
+// meaning it will define beans and configure settings for
+// the applicationannotation marks this class as a configuration class, meaning
+// it will define beans and configure settings for the application
+//------------
+//The WebSecurityConfig class configures Spring Security to:
+//Define publicly accessible URLs.
+//Set up custom authentication and authorization rules.
+//Handle login and logout with custom success handling.
+//Securely hash passwords with BCrypt.
 public class WebSecurityConfig {
-
+    //is a custom service for loading user details.
     private final CustomUserDetailsService customUserDetailsService;
+
+    // manages behavior after successful login, like redirecting to a specific page.
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Autowired
@@ -41,14 +52,15 @@ public class WebSecurityConfig {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+        //  Specifies a custom authentication provider to be used by Spring Security.
         http.authenticationProvider(authenticationProvider());
-
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(publicUrl).permitAll();
             auth.anyRequest().authenticated();
         });
 
+        //Specifies a custom login page at /login that is accessible to everyone.
+        //Uses customAuthenticationSuccessHandler to handle behavior after a successful login
         http.formLogin(form->form.loginPage("/login").permitAll()
                         .successHandler(customAuthenticationSuccessHandler))
                 .logout(logout-> {
@@ -61,6 +73,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
+//authenticates against a database using customUserDetailsService to retrieve user data.
     public AuthenticationProvider authenticationProvider() {
 
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

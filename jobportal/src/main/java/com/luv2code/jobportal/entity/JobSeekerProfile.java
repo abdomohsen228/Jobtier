@@ -14,6 +14,9 @@ public class JobSeekerProfile {
     @OneToOne
     @JoinColumn(name = "user_account_id")
     @MapsId
+    //    This annotation tells JPA that the primary key of the current entity
+    //    (userAccountId) should be mapped to the primary key of the Users entity through userId.
+    //    This means that both entities share the same primary key value.
     private Users userId;
 
     private String firstName;

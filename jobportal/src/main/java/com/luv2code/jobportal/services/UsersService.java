@@ -39,6 +39,7 @@ public class UsersService {
         users.setRegistrationDate(new Date(System.currentTimeMillis()));
         users.setPassword(passwordEncoder.encode(users.getPassword()));
         Users savedUser = usersRepository.save(users);
+        //Retrieves the user type ID (likely an attribute indicating if the user is a recruiter or job seeker).
         int userTypeId = users.getUserTypeId().getUserTypeId();
 
         if (userTypeId == 1) {
@@ -52,13 +53,13 @@ public class UsersService {
     }
 
     public Object getCurrentUserProfile() {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
             Users users = usersRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("Could not found " + "user"));
             int userId = users.getUserId();
+            //checks if the user has the "Recruiter" role, helping decide which profile to retrieve.
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))) {
                 RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
                 return recruiterProfile;

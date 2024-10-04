@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
+//class customizes the behavior that occurs after a successful login
+// . It implements AuthenticationSuccessHandler from Spring Security,
+// allowing it to define specific actions for when a user successfully authenticates
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
