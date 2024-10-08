@@ -155,10 +155,14 @@ public class JobSeekerProfile {
 
     @Transient
     public String getPhotosImagePath(){
-        if(profilePhoto == null || userAccountId==null ){
+        if(profilePhoto == null || userAccountId==null )
             return null;
-        }return "/photos/candidate/" + userAccountId + "/"+ profilePhoto;
+        return "photos/candidate/" + userAccountId + "/"+ profilePhoto;
     }
+//public String getPhotosImagePath(){
+//        if(profilePhoto == null || userAccountId==null )return null;
+//        return "photos/candidate/" + userAccountId + "/"+ profilePhoto;
+//    }
 
     @Override
     public String toString() {
