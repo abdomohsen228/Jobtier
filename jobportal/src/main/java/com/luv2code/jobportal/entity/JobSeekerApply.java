@@ -1,17 +1,16 @@
 package com.luv2code.jobportal.entity;
 
-
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"userId","job"})
+        @UniqueConstraint(columnNames = {"userId", "job"})
 })
+
 // enables an object to be converted into a byte stream,
 // and later reconstructed from that byte stream.
 // This process of converting an object into a format that can be stored or transmitted is called serialization.
@@ -19,19 +18,18 @@ import java.util.Date;
 //Serialization is commonly used when an object needs to be persisted (e.g., saved to a file or database) or transmitted (e.g., sent over a network).
 
 public class JobSeekerApply implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId" , referencedColumnName = "user_account_id")
-    private JobSeekerProfile jobSeekerProfile;
-
+    @JoinColumn(name = "userId", referencedColumnName = "user_account_id")
+    private JobSeekerProfile userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job",referencedColumnName = "jobPostId")
+    @JoinColumn(name = "job", referencedColumnName = "jobPostId")
     private JobPostActivity job;
-
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date applyDate;
@@ -39,12 +37,11 @@ public class JobSeekerApply implements Serializable {
     private String coverLetter;
 
     public JobSeekerApply() {
-
     }
 
-    public JobSeekerApply(Integer id, JobSeekerProfile jobSeekerProfile, JobPostActivity job, Date applyDate, String coverLetter) {
+    public JobSeekerApply(Integer id, JobSeekerProfile userId, JobPostActivity job, Date applyDate, String coverLetter) {
         this.id = id;
-        this.jobSeekerProfile = jobSeekerProfile;
+        this.userId = userId;
         this.job = job;
         this.applyDate = applyDate;
         this.coverLetter = coverLetter;
@@ -58,12 +55,12 @@ public class JobSeekerApply implements Serializable {
         this.id = id;
     }
 
-    public JobSeekerProfile getJobSeekerProfile() {
-        return jobSeekerProfile;
+    public JobSeekerProfile getUserId() {
+        return userId;
     }
 
-    public void setJobSeekerProfile(JobSeekerProfile jobSeekerProfile) {
-        this.jobSeekerProfile = jobSeekerProfile;
+    public void setUserId(JobSeekerProfile userId) {
+        this.userId = userId;
     }
 
     public JobPostActivity getJob() {
@@ -94,11 +91,10 @@ public class JobSeekerApply implements Serializable {
     public String toString() {
         return "JobSeekerApply{" +
                 "id=" + id +
-                ", jobSeekerProfile=" + jobSeekerProfile +
+                ", userId=" + userId +
                 ", job=" + job +
                 ", applyDate=" + applyDate +
                 ", coverLetter='" + coverLetter + '\'' +
                 '}';
     }
 }
-

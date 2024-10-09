@@ -1,6 +1,5 @@
 package com.luv2code.jobportal.entity;
 
-
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -10,14 +9,14 @@ import java.io.Serializable;
         @UniqueConstraint(columnNames = {"userId", "job"})
 })
 public class JobSeekerSave implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "user_account_id")
-    private JobSeekerProfile jobSeekerProfile;
-
+    private JobSeekerProfile userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "job", referencedColumnName = "jobPostId")
@@ -26,9 +25,9 @@ public class JobSeekerSave implements Serializable {
     public JobSeekerSave() {
     }
 
-    public JobSeekerSave(Integer id, JobSeekerProfile jobSeekerProfile, JobPostActivity job) {
+    public JobSeekerSave(Integer id, JobSeekerProfile userId, JobPostActivity job) {
         this.id = id;
-        this.jobSeekerProfile = jobSeekerProfile;
+        this.userId = userId;
         this.job = job;
     }
 
@@ -40,12 +39,12 @@ public class JobSeekerSave implements Serializable {
         this.id = id;
     }
 
-    public JobSeekerProfile getJobSeekerProfile() {
-        return jobSeekerProfile;
+    public JobSeekerProfile getUserId() {
+        return userId;
     }
 
-    public void setJobSeekerProfile(JobSeekerProfile jobSeekerProfile) {
-        this.jobSeekerProfile = jobSeekerProfile;
+    public void setUserId(JobSeekerProfile userId) {
+        this.userId = userId;
     }
 
     public JobPostActivity getJob() {
@@ -60,8 +59,8 @@ public class JobSeekerSave implements Serializable {
     public String toString() {
         return "JobSeekerSave{" +
                 "id=" + id +
-                ", jobSeekerProfile=" + jobSeekerProfile +
-                ", job=" + job +
+                ", userId=" + userId.toString() +
+                ", job=" + job.toString() +
                 '}';
     }
 }

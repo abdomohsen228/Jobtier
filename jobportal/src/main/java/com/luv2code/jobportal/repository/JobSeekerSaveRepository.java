@@ -1,17 +1,18 @@
 package com.luv2code.jobportal.repository;
 
 import com.luv2code.jobportal.entity.JobPostActivity;
-import com.luv2code.jobportal.entity.JobSeekerApply;
 import com.luv2code.jobportal.entity.JobSeekerProfile;
+import com.luv2code.jobportal.entity.JobSeekerSave;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface JobSeekerApplyRepository extends JpaRepository<JobSeekerApply, Integer> {
+public interface JobSeekerSaveRepository extends JpaRepository<JobSeekerSave, Integer> {
 
-    List<JobSeekerApply> findByUserId(JobSeekerProfile userId);
+    public List<JobSeekerSave> findByUserId(JobSeekerProfile userAccountId);
 
-    List<JobSeekerApply> findByJob(JobPostActivity job);
+    List<JobSeekerSave> findByJob(JobPostActivity job);
+
 }

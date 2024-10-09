@@ -1,17 +1,14 @@
 package com.luv2code.jobportal.entity;
 
+public class RecruiterJobsDto {
 
-
-//by using DTOs, you separate the data representation layer (the database query results) from the business logic and presentation layers.
-// DTOs help ensure that only the necessary data is passed to the view, reducing coupling between layers
-public class RecruiterJobDto {
-    private Long  totalCandidates;
-    private Integer  jobPostId;
+    private Long totalCandidates;
+    private Integer jobPostId;
     private String jobTitle;
     private JobLocation jobLocationId;
     private JobCompany jobCompanyId;
 
-    public RecruiterJobDto(Long totalCandidates, Integer jobPostId, String jobTitle, JobLocation jobLocationId, JobCompany jobCompanyId) {
+    public RecruiterJobsDto(Long totalCandidates, Integer jobPostId, String jobTitle, JobLocation jobLocationId, JobCompany jobCompanyId) {
         this.totalCandidates = totalCandidates;
         this.jobPostId = jobPostId;
         this.jobTitle = jobTitle;
