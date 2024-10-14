@@ -51,8 +51,11 @@ public class WebSecurityConfig {
             "/fonts**", "/favicon.ico", "/resources/**", "/error"};
 
     @Bean
+//    It takes an HttpSecurity object as a parameter, which is used to configure security settings for HTTP requests.
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //  Specifies a custom authentication provider to be used by Spring Security.
+//        should return an instance of a class implementing AuthenticationProvider,
+//        which handles user authentication logic (like checking credentials against a database).
         http.authenticationProvider(authenticationProvider());
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(publicUrl).permitAll();
