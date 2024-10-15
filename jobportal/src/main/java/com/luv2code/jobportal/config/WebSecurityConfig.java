@@ -70,7 +70,12 @@ public class WebSecurityConfig {
                     logout.logoutUrl("/logout");
                     logout.logoutSuccessUrl("/");
                 }).cors(Customizer.withDefaults())
-                .csrf(csrf->csrf.disable());
+                .csrf(csrf->csrf.disable())
+                .rememberMe(rememberMe -> rememberMe
+                        .key("uniqueAndSecret")
+                        .tokenValiditySeconds(86400)
+                        .rememberMeParameter("remember-me")
+                );
 
         return http.build();
     }
