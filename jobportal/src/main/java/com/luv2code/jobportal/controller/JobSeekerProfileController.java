@@ -67,6 +67,7 @@ public class JobSeekerProfileController {
         return "job-seeker-profile";
     }
 
+    // that is for action for from
     @PostMapping("/addNew")
     public String addNew(JobSeekerProfile jobSeekerProfile,
                          @RequestParam("image") MultipartFile image,
