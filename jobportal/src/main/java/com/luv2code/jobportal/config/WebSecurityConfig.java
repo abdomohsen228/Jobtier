@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 //annotation marks this class as a configuration class,
 // meaning it will define beans and configure settings for
-// the applicationannotation marks this class as a configuration class, meaning
+// the application annotation marks this class as a configuration class, meaning
 // it will define beans and configure settings for the application
 //------------
 //The WebSecurityConfig class configures Spring Security to:
